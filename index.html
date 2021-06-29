@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McGonagle Neon Signs</title>
+    <link rel="stylesheet" href="/style.sass">
+</head>
+<body>
+    <div class="editor">
+        <input id="sign" type="text" value="Hello!">
+    </div>
+    <div class="topbar">
+        <select name="Color" id="color">
+            <option value="#fff">White</option>
+            <option value="#f00">Ruby Red</option>
+            <option value="#f55">Hot Pink</option>
+            <option value="#f3f">Violet</option>
+            <option value="#55f">Turquoise</option>
+            <option value="#5f5">Emerald Green</option>
+            <option value="#00f">Bromo Blue</option>
+            <option value="#99f">Light Blue</option>
+        </select>
+        <select name="Font" id="font">
+            <option value="'Pacifico', cursive">Peaceful</option>
+            <option value="'Dancing Script', cursive">Dancing</option>
+        </select>
+    </div>
+    <script>
+
+        var font = document.getElementById('font');
+        var color = document.getElementById('color');
+
+        var sign = document.getElementById('sign');
+
+        function updateSign() { 
+
+            sign.style.fontFamily = font.value;
+            sign.style.color = color.value;
+            sign.style.textShadow = `0px 0px 30px ${color.value}`;
+
+        }
+
+        font.onchange = updateSign; 
+        color.onchange = updateSign;
+
+    </script>
+</body>
+</html>
