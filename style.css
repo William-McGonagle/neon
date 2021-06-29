@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: none;
+}
+
+.editor {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: #111;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: visible;
+}
+
+.editor input {
+  width: 100vw;
+  height: 100%;
+  background: inherit;
+  border: none;
+  color: #fff;
+  font-size: 96px;
+  text-shadow: 0px 0px 50px #fff;
+  overflow: visible;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+}
+
+.topbar {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.topbar select {
+  padding: 0px 50px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background: inherit;
+  color: #ddd;
+  font-size: 22px;
+  margin: 5px;
+  font-weight: 100;
+  font-family: sans-serif;
+}
+/*# sourceMappingURL=style.css.map */
