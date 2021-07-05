@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -110,10 +111,10 @@ main {
   -webkit-box-shadow: 0px 0px 0px 1px #f5f5f5;
           box-shadow: 0px 0px 0px 1px #f5f5f5;
   margin: 0px;
-  -webkit-transition: -webkit-box-shadow 0.2s;
-  transition: -webkit-box-shadow 0.2s;
-  transition: box-shadow 0.2s;
-  transition: box-shadow 0.2s, -webkit-box-shadow 0.2s;
+  -webkit-transition: -webkit-box-shadow 0.2s, -webkit-transform 0.2s;
+  transition: -webkit-box-shadow 0.2s, -webkit-transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s, -webkit-box-shadow 0.2s, -webkit-transform 0.2s;
 }
 
 .sidebar .colors div p {
@@ -140,8 +141,7 @@ main {
 .sidebar .fonts {
   display: -ms-grid;
   display: grid;
-  -webkit-column-gap: 10px;
-          column-gap: 10px;
+  gap: 10px;
   padding: 10px;
       grid-template-areas: "a a";
 }
