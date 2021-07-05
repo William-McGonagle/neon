@@ -1,20 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>McGonagle Neon Signs</title>
-    <link rel="stylesheet" href="./style.css"> 
-</head>
-<body>
-    <div class="editor">
-        <input id="sign" type="text" value="Hello!">
-    </div>
-    <div class="topbar">
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="editor">
+        <input id="sign" type="text" value="Hello!" />
+      </div>
+      <div class="sidebar">
+        <h3>Color</h3>
+        <div class="colors">
+          <div onclick="setColor('#fff')">
+            <div class="color" style="background: #fff"></div>
+            <p>Pure</p>
+          </div>
+          <div onclick="setColor('#f7cd17')">
+            <div class="color" style="background: #f7cd17"></div>
+            <p>Gold</p>
+          </div>
+          <div onclick="setColor('#ec4034')">
+            <div class="color" style="background: #ec4034"></div>
+            <p>Ruby</p>
+          </div>
+          <div onclick="setColor('#73fa70')">
+            <div class="color" style="background: #73fa70"></div>
+            <p>Jade</p>
+          </div>
+          <div onclick="setColor('#ee96e7')">
+            <div class="color" style="background: #ee96e7"></div>
+            <p>Precioso</p>
+          </div>
+          <div onclick="setColor('#feff01')">
+            <div class="color" style="background: #feff01"></div>
+            <p>Limoncello</p>
+          </div>
+          <div onclick="setColor('#e93baa')">
+            <div class="color" style="background: #e93baa"></div>
+            <p>Vibranté</p>
+          </div>
+          <div onclick="setColor('#581d89')">
+            <div class="color" style="background: #581d89"></div>
+            <p>Mauve</p>
+          </div>
+          <div onclick="setColor('#fcf5db')">
+            <div class="color" style="background: #fcf5db"></div>
+            <p>Eggshell</p>
+          </div>
+          <div onclick="setColor('#f08559')">
+            <div class="color" style="background: #f08559"></div>
+            <p>Sunstone</p>
+          </div>
+          <div onclick="setColor('#031696')">
+            <div class="color" style="background: #031696"></div>
+            <p>Bismo</p>
+          </div>
+          <div onclick="setColor('#51b5f9')">
+            <div class="color" style="background: #51b5f9"></div>
+            <p>Lapiz</p>
+          </div>
+          <div onclick="setColor('#24d9c6')">
+            <div class="color" style="background: #24d9c6"></div>
+            <p>Oceano</p>
+          </div>
+        </div>
+        <h3>Font</h3>
+        <div class="fonts">
+          <div
+            onclick="setFont('\'Dancing Script\', cursive')"
+            style="font-family: 'Dancing Script', cursive"
+          >
+            Dancing
+          </div>
+          <div
+            onclick="setFont('\'Pacifico\', cursive')"
+            style="font-family: 'Pacifico', cursive"
+          >
+            Peaceful
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- <div class="topbar">
         <select name="Color" id="color">
             <option value="#fff">White</option>
-            <option value="#f00">Ruby Red</option>
+            <option value="#f00">Ruby Red</option> 
             <option value="#f55">Hot Pink</option>
             <option value="#f3f">Violet</option>
             <option value="#55f">Turquoise</option>
@@ -26,25 +100,18 @@
             <option value="'Pacifico', cursive">Peaceful</option>
             <option value="'Dancing Script', cursive">Dancing</option>
         </select>
-    </div>
+    </div> -->
     <script>
+      var sign = document.getElementById("sign");
 
-        var font = document.getElementById('font');
-        var color = document.getElementById('color');
+      function setColor(color) {
+        sign.style.color = color;
+        sign.style.textShadow = `0px 0px 30px ${color}`;
+      }
 
-        var sign = document.getElementById('sign');
-
-        function updateSign() { 
-
-            sign.style.fontFamily = font.value;
-            sign.style.color = color.value;
-            sign.style.textShadow = `0px 0px 30px ${color.value}`;
-
-        }
-
-        font.onchange = updateSign; 
-        color.onchange = updateSign;
-
+      function setFont(font) {
+        sign.style.fontFamily = font;
+      }
     </script>
-</body>
+  </body>
 </html>
