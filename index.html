@@ -10,7 +10,12 @@
   <body>
     <main>
       <div class="editor">
-        <input id="sign" type="text" value="Hello!" />
+        <div
+          class="input"
+          oninput="updateStats()"
+          id="sign"
+          contenteditable
+        ></div>
       </div>
       <div class="sidebar">
         <h3>Color</h3>
@@ -149,34 +154,196 @@
             Auzzie
           </div>
         </div>
+        <h3>Size</h3>
+        <div class="sizes">
+          <div
+            style="
+              font-weight: 100;
+              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+                sans-serif;
+            "
+            onclick="setSize('small')"
+          >
+            Modest
+          </div>
+          <div
+            style="
+              font-weight: 400;
+              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+                sans-serif;
+            "
+            onclick="setSize('medium')"
+          >
+            Wide
+          </div>
+          <div
+            style="
+              font-weight: 600;
+              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+                sans-serif;
+            "
+            onclick="setSize('large')"
+          >
+            Grand
+          </div>
+          <div
+            style="
+              font-weight: 700;
+              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+                sans-serif;
+            "
+            onclick="setSize('extra')"
+          >
+            Vast
+          </div>
+        </div>
+        <h3>Information</h3>
+        <div class="info">
+          <p><b>Width:</b> <span id="width">30.5"</span></p>
+          <p><b>Price:</b> <span id="price">$1,300.00</span></p>
+        </div>
+        <!-- <button class="share">Share</button> -->
+        <button
+          class="buy"
+          onclick="document.getElementById('modal').style.display = 'flex';"
+        >
+          Order
+        </button>
+      </div>
+      <div id="modal" style="display: none" class="popup">
+        <div class="inside">
+          <h1>Order Now!</h1>
+          <p>
+            Just enter your email and name below and we'll get a representative
+            to start making your sign today.
+          </p>
+          <div class="input">
+            <input id="name" type="text" placeholder="Jane Doe" />
+          </div>
+          <div class="input">
+            <input id="email" type="email" placeholder="jane@example.com" />
+          </div>
+          <svg
+            onclick="document.getElementById('modal').style.display = 'none';"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="bi bi-arrow-left-short"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+            />
+          </svg>
+          <button onclick="purchase()" class="submit">Submit Order</button>
+        </div>
       </div>
     </main>
-    <!-- <div class="topbar">
-        <select name="Color" id="color">
-            <option value="#fff">White</option>
-            <option value="#f00">Ruby Red</option> 
-            <option value="#f55">Hot Pink</option>
-            <option value="#f3f">Violet</option>
-            <option value="#55f">Turquoise</option>
-            <option value="#5f5">Emerald Green</option>
-            <option value="#00f">Bromo Blue</option>
-            <option value="#99f">Light Blue</option>
-        </select>
-        <select name="Font" id="font">
-            <option value="'Pacifico', cursive">Peaceful</option>
-            <option value="'Dancing Script', cursive">Dancing</option>
-        </select>
-    </div> -->
     <script>
       var sign = document.getElementById("sign");
+      sign.innerHTML = "Hello!";
+      var size = "small";
 
       function setColor(color) {
         sign.style.color = color;
         sign.style.textShadow = `0px 0px 30px ${color}`;
+        updateStats();
       }
 
       function setFont(font) {
         sign.style.fontFamily = font;
+        updateStats();
+      }
+
+      function setSize(_size) {
+        var sizes = {
+          small: 48,
+          medium: 60,
+          large: 80,
+          extra: 120,
+        };
+
+        sign.style.fontSize = sizes[_size] + "px";
+        size = _size;
+        updateStats();
+      }
+
+      function updateStats() {
+        var _size = getSize();
+
+        document.getElementById("width").innerHTML = `${
+          Math.floor(_size.x * 100) / 100
+        }"`;
+        document.getElementById("price").innerHTML = `$${numberWithCommas(
+          getPrice()
+        )}.00`;
+      }
+
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      function getSize() {
+        var sizes = {
+          small: {
+            x: 18,
+            y: 2,
+          },
+          medium: {
+            x: 28,
+            y: 2.3,
+          },
+          large: {
+            x: 42,
+            y: 2.85,
+          },
+          extra: {
+            x: 60,
+            y: 4,
+          },
+        };
+
+        return sizes[size];
+      }
+
+      function getPrice() {
+        var prices = {
+          small: 5,
+          medium: 8.5,
+          large: 15,
+          extra: 22,
+        };
+
+        return prices[size] * sign.innerHTML.length + prices[size] * 40;
+      }
+
+      function purchase() {
+        var data = new FormData();
+
+        data.append("name", document.getElementById("name").value);
+        data.append("respond", document.getElementById("email").value);
+        data.append("text", sign.innerHTML);
+        data.append("color", sign.style.color);
+        data.append("font", sign.style.fontFamily);
+        data.append("size", size);
+        data.append("price", getPrice());
+        data.append("width", getSize().x);
+
+        fetch("https://formspree.io/f/mqkwyljg", {
+          method: "POST",
+          body: data,
+          headers: {
+            Accept: "application/json",
+          },
+        })
+          .then((response) => {
+            document.getElementById("modal").style.display = "none";
+            alert("Order Successfully Placed");
+          })
+          .catch((error) => {
+            document.getElementById("modal").style.display = "none";
+            alert("Order Successfully Placed");
+          });
       }
     </script>
   </body>
